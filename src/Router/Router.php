@@ -14,16 +14,30 @@ class Router
     /**
      * @var ContainerInterface
      */
-    private $containerInterface;
+    private $container;
 
     /**
      * Router constructor.
      * @param array $config
-     * @param ContainerInterface $containerInterface
+     * @param ContainerInterface $container
      */
-    public function __construct(array $config = [], ContainerInterface $containerInterface)
+    public function __construct(array $config = [], ContainerInterface $container)
     {
         $this->config = $config;
-        $this->containerInterface = $containerInterface;
+        $this->container = $container;
+    }
+
+    public function route()
+    {
+        $getRoute = $_GET['route'];
+        if (isset($this->config[$getRoute])) {
+            $service = $this->container->get($getRoute);
+            echo $service->indexAction();
+            exit();
+        } else {
+            header("HTTP/1.0 404 Not Found");
+            echo 'Route does not exist.';
+            exit();
+        }
     }
 }
