@@ -2,7 +2,7 @@
 
 namespace DesignPatterns\Controller;
 
-class HomeController
+class HomeController implements ControllerInterface
 {
 
     public function indexAction()
