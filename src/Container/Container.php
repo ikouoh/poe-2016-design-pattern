@@ -6,10 +6,9 @@
  * Time: 15:34
  */
 
-namespace DesignPatterns;
+namespace DesignPatterns\Container;
 
-
-use Exception\NotFoundException\NotFoundException;
+use DesignPatterns\Container\Exception\NotFoundException;
 use Interop\Container\ContainerInterface;
 
 class Container implements ContainerInterface
@@ -21,7 +20,7 @@ class Container implements ContainerInterface
      * Container constructor.
      * @param $services
      */
-    public function __construct(array $services=[])
+    public function __construct(array $services = [])
     {
         $this->services = $services;
     }
@@ -32,10 +31,9 @@ class Container implements ContainerInterface
      */
     public function get($id)
     {
-
-        if ( !$this->has($id)) {
+        if (!$this->has($id)) {
             throw new NotFoundException("Le service demandé n'est pas disponible.");
-        } else if ( !class_exists($this->$services[$id])){
+        } elseif (!class_exists($this->$services[$id])) {
             throw new NotFoundException(sprintf("La classe %s demandée n'existe pas.", $this->services[$id]));
         }
         return new $this->services[$id]();
@@ -55,8 +53,8 @@ class Container implements ContainerInterface
      * @param string $service
      * @param string $key
      */
-    public function add($service, $key) {
-
+    public function add($service, $key)
+    {
         $this->services[$key] = $service;
     }
 }
