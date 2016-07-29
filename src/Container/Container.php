@@ -32,7 +32,7 @@ class Container implements ContainerInterface
     public function get($id)
     {
         if (empty($this->has($id))) {
-            throw new NotFoundException("Le service demandé n'est pas disponible.");
+            throw new NotFoundException(sprintf("Le service demandé %s n'est pas disponible.", $id));
         } elseif (!is_object($this->services[$id]) && !class_exists($this->services[$id])) {
             throw new NotFoundException(sprintf("La classe %s demandée n'existe pas.", $this->services[$id]));
         }

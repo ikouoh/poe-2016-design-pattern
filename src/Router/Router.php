@@ -32,7 +32,7 @@ class Router
         $getRoute = (!empty($_GET['route'])) ? $_GET['route'] : 'home';
 
         if (!empty($this->config[$getRoute])) {
-            $controller = $this->container->get($getRoute);
+            $controller = $this->container->get($this->config[$getRoute]);
             echo $controller->indexAction();
             exit();
         } else {

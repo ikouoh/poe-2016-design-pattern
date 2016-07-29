@@ -6,7 +6,7 @@
  * Time: 16:13
  */
 
-namespace DesignPatterns\Container\Exception\NotFoundException;
+namespace DesignPatterns\Container\Exception;
 
 use Exception;
 use Interop\Container\Exception\NotFoundException as InteropNotFoundException;
