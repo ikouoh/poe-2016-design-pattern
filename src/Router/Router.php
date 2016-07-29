@@ -21,7 +21,7 @@ class Router
      * @param array $config
      * @param ContainerInterface $container
      */
-    public function __construct(array $config = [], ContainerInterface $container)
+    public function __construct(array $config, ContainerInterface $container)
     {
         $this->config = $config;
         $this->container = $container;
@@ -29,10 +29,11 @@ class Router
 
     public function route()
     {
-        $getRoute = $_GET['route'];
-        if (isset($this->config[$getRoute])) {
-            $service = $this->container->get($getRoute);
-            echo $service->indexAction();
+        $getRoute = (!empty($_GET['route'])) ? $_GET['route'] : 'home';
+
+        if (!empty($this->config[$getRoute])) {
+            $controller = $this->container->get($getRoute);
+            echo $controller->indexAction();
             exit();
         } else {
             header("HTTP/1.0 404 Not Found");

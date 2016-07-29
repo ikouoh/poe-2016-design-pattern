@@ -4,6 +4,7 @@ namespace DesignPatterns\Application;
 
 use ArrayObject;
 use DesignPatterns\Container\Container;
+use DesignPatterns\Router\RouterFactory;
 
 class Application
 {
@@ -33,11 +34,16 @@ class Application
             new ArrayObject($this->configuration),
             'configuration'
         );
+        $this->container->add(
+            RouterFactory::class,
+            'router'
+        );
         return $this;
     }
 
     public function run()
     {
-        echo 'run';
+        $router = $this->container->get('router');
+        $router->route();
     }
 }

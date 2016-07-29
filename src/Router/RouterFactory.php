@@ -12,10 +12,9 @@ class RouterFactory implements FactoryInterface
         $config = $container->get('configuration');
 
         if (!$config->offsetExists('routes')) {
-            $config->offsetSet('routes', []);
+            $config->routes = [];
         }
-        $conf = $config->offsetGet('routes')->getArrayCopy();
-
-        return new Router($conf, $container);
+        
+        return new Router($config->routes, $container);
     }
 }

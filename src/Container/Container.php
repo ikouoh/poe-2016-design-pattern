@@ -31,9 +31,9 @@ class Container implements ContainerInterface
      */
     public function get($id)
     {
-        if (!$this->has($id)) {
+        if (empty($this->has($id))) {
             throw new NotFoundException("Le service demandé n'est pas disponible.");
-        } elseif (!class_exists($this->services[$id])) {
+        } elseif (!is_object($this->services[$id]) && !class_exists($this->services[$id])) {
             throw new NotFoundException(sprintf("La classe %s demandée n'existe pas.", $this->services[$id]));
         }
 
@@ -42,7 +42,7 @@ class Container implements ContainerInterface
 
             $this->services[$id] = ($factoryOrService instanceof FactoryInterface)
                 ? $factoryOrService->createService($this)
-                : factoryOrService;
+                : $factoryOrService;
         }
         return $this->services[$id];
     }
