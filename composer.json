@@ -16,5 +16,10 @@
         "psr-4": {
             "DesignPatterns\\": "src/"
         }
-    }
+    },
+    "scripts": {
+        "cs": "phpcs",
+        "cs-fix": "phpcbf",
+        "serve": "php -S 0.0.0.0:8080 -t public/ public/index.php"
+    }    
 }
