@@ -2,6 +2,7 @@
 
 namespace DesignPatterns\Application;
 
+use ArrayObject;
 use DesignPatterns\Container\Container;
 
 class Application
@@ -28,7 +29,10 @@ class Application
             $this->configuration['services'] = [];
         }
         $this->container = new Container($this->configuration['services']);
-
+        $this->container->add(
+            new ArrayObject($this->configuration),
+            'configuration'
+        );
         return $this;
     }
 
