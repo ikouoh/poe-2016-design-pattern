@@ -34,6 +34,7 @@ class Router
     ) {
         $this->config = $config;
         $this->container = $container;
+        $this->cache = $cache;
     }
 
     public function route()
